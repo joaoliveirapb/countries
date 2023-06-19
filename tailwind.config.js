@@ -13,6 +13,9 @@ module.exports = {
           950: '#222E37',
         },
       },
+      gridTemplateColumns: {
+        custom: 'repeat(4, 264px)',
+      },
     },
   },
   plugins: [],
