@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['s1.static.brasilescola.uol.com.br'],
+    domains: ['flagcdn.com', 'upload.wikimedia.org'],
   },
 }
 

@@ -1,29 +1,47 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
-export function CountryItem() {
+interface CountryItemProps {
+  flags: string
+  name: string
+  population: number
+  region: string
+  capital: string
+}
+
+export function CountryItem({
+  flags,
+  name,
+  population,
+  region,
+  capital,
+}: CountryItemProps) {
   return (
-    <div className="flex flex-col rounded-md bg-white shadow-md dark:bg-blue-900">
+    <Link
+      href={`/country`}
+      className="flex flex-col rounded-md bg-white shadow-md hover:scale-[1.03] dark:bg-blue-900"
+    >
       <Image
-        src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/2-bandeira-do-brasil.jpg"
+        src={flags}
         alt="bandeira"
         width={264}
         height={160}
-        className="rounded-t-md"
+        className="h-[160px] w-[264px] rounded-t-md shadow-sm"
       />
       <div className="px-5 py-5">
-        <p className="text-xl font-bold">Brazil</p>
+        <p className="text-xl font-bold">{name}</p>
         <div className="mt-3 space-y-1 text-sm">
           <p className="font-semibold">
-            Population: <span className="font-normal">206.135.893</span>
+            Population: <span className="font-normal">{population}</span>
           </p>
           <p className="font-semibold">
-            Region: <span className="font-normal">America</span>
+            Region: <span className="font-normal">{region}</span>
           </p>
           <p className="font-semibold">
-            Capital: <span className="font-normal">Brasília</span>
+            Capital: <span className="font-normal">{capital}</span>
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
