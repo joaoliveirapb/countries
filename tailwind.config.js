@@ -14,7 +14,11 @@ module.exports = {
         },
       },
       gridTemplateColumns: {
-        custom: 'repeat(4, 264px)',
+        one: 'repeat(1, 264px)',
+        two: 'repeat(2, 264px)',
+        three: 'repeat(3, 264px)',
+        four: 'repeat(4, 264px)',
+        five: 'repeat(5, 264px)',
       },
     },
   },
