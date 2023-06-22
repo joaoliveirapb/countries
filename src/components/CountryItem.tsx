@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { CountryDetails } from './CountryDetails'
 
 interface CountryItemProps {
   flags: string
@@ -18,7 +19,7 @@ export function CountryItem({
 }: CountryItemProps) {
   return (
     <Link
-      href={`/country`}
+      href={`/country/${name}`}
       className="flex flex-col rounded-md bg-white shadow-md hover:scale-[1.03] dark:bg-blue-900"
     >
       <Image
@@ -30,16 +31,10 @@ export function CountryItem({
       />
       <div className="px-5 py-5">
         <p className="text-xl font-bold">{name}</p>
-        <div className="mt-3 space-y-1 text-sm">
-          <p className="font-semibold">
-            Population: <span className="font-normal">{population}</span>
-          </p>
-          <p className="font-semibold">
-            Region: <span className="font-normal">{region}</span>
-          </p>
-          <p className="font-semibold">
-            Capital: <span className="font-normal">{capital}</span>
-          </p>
+        <div className="mt-3 space-y-1">
+          <CountryDetails label="Population" content={population} />
+          <CountryDetails label="Region" content={region} />
+          <CountryDetails label="Capital" content={capital} />
         </div>
       </div>
     </Link>
