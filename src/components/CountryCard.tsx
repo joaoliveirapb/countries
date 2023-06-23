@@ -4,14 +4,16 @@ import { CountryDetails } from './CountryDetails'
 
 interface CountryItemProps {
   flags: string
+  alt: string
   name: string
-  population: number
+  population: string | number
   region: string
   capital: string
 }
 
-export function CountryItem({
+export function CountryCard({
   flags,
+  alt,
   name,
   population,
   region,
@@ -24,7 +26,7 @@ export function CountryItem({
     >
       <Image
         src={flags}
-        alt="bandeira"
+        alt={alt}
         width={264}
         height={160}
         className="h-[160px] w-[264px] rounded-t-md shadow-sm"
