@@ -63,7 +63,7 @@ export default function Country({ params }: CountryPageProps) {
   console.log(country)
 
   return (
-    <main className="bg-neutral-50 px-16 py-10 dark:bg-blue-950">
+    <main className="bg-neutral-50 px-16 py-10 dark:bg-blue-950 max-[490px]:px-4">
       <div className="flex">
         <Link
           href="/"
@@ -75,7 +75,10 @@ export default function Country({ params }: CountryPageProps) {
       </div>
 
       {country.map((item) => (
-        <div key={item.name.common} className="mt-16 flex justify-between">
+        <div
+          key={item.name.common}
+          className="mt-16 flex justify-between max-[1225px]:flex-col max-[1225px]:gap-8"
+        >
           <div>
             <Image
               src={item.flags.svg}
@@ -85,9 +88,9 @@ export default function Country({ params }: CountryPageProps) {
               className="rounded-md shadow-xl"
             />
           </div>
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between max-sm:gap-6">
             <h1 className="text-4xl font-semibold">{item.name.common}</h1>
-            <div className="flex gap-40">
+            <div className="flex gap-40 max-sm:flex-col max-sm:gap-4">
               <div className="flex flex-col gap-2">
                 <CountryDetails
                   label="Native Name"
@@ -137,7 +140,7 @@ export default function Country({ params }: CountryPageProps) {
                 )}
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 max-sm:flex-col max-sm:items-start">
               <span className="text-sm font-semibold">Border Countries:</span>
               <div className="flex flex-wrap gap-1">
                 {item.borders ? (
