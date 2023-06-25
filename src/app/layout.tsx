@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header'
-import { ThemesProvider } from '@/context/Providers'
+import { ThemesProvider } from '@/context/ThemeContext'
 import { Poppins } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
