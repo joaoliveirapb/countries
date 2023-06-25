@@ -2,38 +2,11 @@
 
 import { CountryCard } from '@/components/CountryCard'
 import { Search } from '@/components/Search'
-import { api } from '@/services/api'
-import { useEffect, useState } from 'react'
-
-interface CountriesProps {
-  flags: {
-    png: string
-    alt: string
-  }
-  name: {
-    common: string
-  }
-  population: number
-  region: string
-  capital: string
-}
+import { CountriesContext } from '@/context/CountriesContext'
+import { useContext } from 'react'
 
 export default function Home() {
-  const [countries, setCountries] = useState<CountriesProps[]>([])
-
-  async function getCountries() {
-    try {
-      const response = await api.get('/all')
-      const data = response.data
-      setCountries(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getCountries()
-  }, [])
+  const { countries } = useContext(CountriesContext)
 
   return (
     <main className="bg-neutral-50 px-16 py-10 dark:bg-blue-950 max-[490px]:px-4">

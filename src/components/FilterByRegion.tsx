@@ -1,10 +1,17 @@
 'use client'
 
+import { CountriesContext } from '@/context/CountriesContext'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import { useState } from 'react'
+import { useContext } from 'react'
 
 export function FilterByRegion() {
-  const [filterIsOpen, setFilterIsOpen] = useState<boolean>(false)
+  const {
+    getCountries,
+    filterByRegion,
+    countriesIsFiltered,
+    filterIsOpen,
+    setFilterIsOpen,
+  } = useContext(CountriesContext)
 
   return (
     <div>
@@ -18,11 +25,44 @@ export function FilterByRegion() {
       {filterIsOpen && (
         <div className="absolute mt-1 w-40 rounded-md bg-white shadow-md dark:bg-blue-900">
           <ul className="px-4 py-2 text-sm">
-            <li className="cursor-pointer rounded-md py-1">Africa</li>
-            <li className="cursor-pointer rounded-md py-1">America</li>
-            <li className="cursor-pointer rounded-md py-1">Asia</li>
-            <li className="cursor-pointer rounded-md py-1">Europe</li>
-            <li className="cursor-pointer rounded-md py-1">Oceania</li>
+            <li
+              className="cursor-pointer rounded-md py-1"
+              onClick={() => filterByRegion('africa')}
+            >
+              Africa
+            </li>
+            <li
+              className="cursor-pointer rounded-md py-1"
+              onClick={() => filterByRegion('america')}
+            >
+              America
+            </li>
+            <li
+              className="cursor-pointer rounded-md py-1"
+              onClick={() => filterByRegion('asia')}
+            >
+              Asia
+            </li>
+            <li
+              className="cursor-pointer rounded-md py-1"
+              onClick={() => filterByRegion('europe')}
+            >
+              Europe
+            </li>
+            <li
+              className="cursor-pointer rounded-md py-1"
+              onClick={() => filterByRegion('oceania')}
+            >
+              Oceania
+            </li>
+            {countriesIsFiltered && (
+              <li
+                className="cursor-pointer rounded-md py-1"
+                onClick={getCountries}
+              >
+                All Countries
+              </li>
+            )}
           </ul>
         </div>
       )}
