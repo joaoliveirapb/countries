@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header'
-import { Providers } from '@/components/Providers'
+import { ThemesProvider } from '@/context/Providers'
 import { Poppins } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
@@ -19,10 +19,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Providers>
+        <ThemesProvider>
           <Header />
           {children}
-        </Providers>
+        </ThemesProvider>
       </body>
     </html>
   )
