@@ -24,8 +24,8 @@ interface CountriesProps {
 }
 
 interface CountriesContextProps {
-  countries: CountriesProps[]
-  setCountries: Dispatch<SetStateAction<CountriesProps[]>>
+  countries: CountriesProps[] | null
+  setCountries: Dispatch<SetStateAction<CountriesProps[] | null>>
   countriesIsFiltered: boolean
   getCountries: () => Promise<void>
   filterByRegion: (region: string) => Promise<void>
@@ -33,7 +33,7 @@ interface CountriesContextProps {
   setFilterIsOpen: Dispatch<SetStateAction<boolean>>
   search: string
   setSearch: Dispatch<SetStateAction<string>>
-  filteredCountries: CountriesProps[]
+  filteredCountries: CountriesProps[] | null
 }
 
 export const CountriesContext = createContext<CountriesContextProps>({
@@ -50,7 +50,7 @@ export const CountriesContext = createContext<CountriesContextProps>({
 })
 
 export function CountriesProvider({ children }: { children: ReactNode }) {
-  const [countries, setCountries] = useState<CountriesProps[]>([])
+  const [countries, setCountries] = useState<CountriesProps[] | null>(null)
   const [filteredCountries, setFilteredCountries] = useState(countries)
   const [countriesIsFiltered, setCountriesIsFiltered] = useState<boolean>(false)
   const [filterIsOpen, setFilterIsOpen] = useState<boolean>(false)
@@ -87,10 +87,14 @@ export function CountriesProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    const filtered = countries.filter((country) =>
-      country.name.common.toLowerCase().includes(searchDeferred.toLowerCase()),
-    )
-    setFilteredCountries(filtered)
+    if (countries) {
+      const filtered = countries.filter((country) =>
+        country.name.common
+          .toLowerCase()
+          .includes(searchDeferred.toLowerCase()),
+      )
+      setFilteredCountries(filtered)
+    }
   }, [searchDeferred, countries])
 
   return (
