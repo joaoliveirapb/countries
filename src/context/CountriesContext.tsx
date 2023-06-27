@@ -6,6 +6,7 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useDeferredValue,
   useEffect,
   useState,
 } from 'react'
@@ -13,7 +14,6 @@ import {
 interface CountriesProps {
   flags: {
     png: string
-    alt: string
   }
   name: {
     common: string
@@ -25,12 +25,15 @@ interface CountriesProps {
 
 interface CountriesContextProps {
   countries: CountriesProps[]
-  setCountries: Dispatch<SetStateAction<any[]>>
+  setCountries: Dispatch<SetStateAction<CountriesProps[]>>
   countriesIsFiltered: boolean
   getCountries: () => Promise<void>
   filterByRegion: (region: string) => Promise<void>
   filterIsOpen: boolean
   setFilterIsOpen: Dispatch<SetStateAction<boolean>>
+  search: string
+  setSearch: Dispatch<SetStateAction<string>>
+  filteredCountries: CountriesProps[]
 }
 
 export const CountriesContext = createContext<CountriesContextProps>({
@@ -41,12 +44,18 @@ export const CountriesContext = createContext<CountriesContextProps>({
   filterByRegion: async () => {},
   filterIsOpen: false,
   setFilterIsOpen: () => {},
+  search: '',
+  setSearch: () => {},
+  filteredCountries: [],
 })
 
 export function CountriesProvider({ children }: { children: ReactNode }) {
   const [countries, setCountries] = useState<CountriesProps[]>([])
+  const [filteredCountries, setFilteredCountries] = useState(countries)
   const [countriesIsFiltered, setCountriesIsFiltered] = useState<boolean>(false)
   const [filterIsOpen, setFilterIsOpen] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
+  const searchDeferred = useDeferredValue(search)
 
   async function getCountries() {
     try {
@@ -77,6 +86,13 @@ export function CountriesProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    const filtered = countries.filter((country) =>
+      country.name.common.toLowerCase().includes(searchDeferred.toLowerCase()),
+    )
+    setFilteredCountries(filtered)
+  }, [searchDeferred, countries])
+
   return (
     <CountriesContext.Provider
       value={{
@@ -87,6 +103,9 @@ export function CountriesProvider({ children }: { children: ReactNode }) {
         filterByRegion,
         filterIsOpen,
         setFilterIsOpen,
+        search,
+        setSearch,
+        filteredCountries,
       }}
     >
       {children}
