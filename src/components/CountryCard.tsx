@@ -4,7 +4,6 @@ import { CountryDetails } from './CountryDetails'
 
 interface CountryItemProps {
   flags: string
-  alt: string
   name: string
   population: string | number
   region: string
@@ -13,7 +12,6 @@ interface CountryItemProps {
 
 export function CountryCard({
   flags,
-  alt,
   name,
   population,
   region,
@@ -26,9 +24,10 @@ export function CountryCard({
     >
       <Image
         src={flags}
-        alt={alt}
+        alt={`A Bandeira do(a) ${name}`}
         width={264}
         height={160}
+        priority
         className="h-[160px] w-[264px] rounded-t-md shadow-sm"
       />
       <div className="px-5 py-5">

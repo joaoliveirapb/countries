@@ -17,7 +17,6 @@ interface CountryPageProps {
 interface CountryProps {
   flags: {
     svg: string
-    alt: string
   }
   name: {
     common: string
@@ -60,8 +59,6 @@ export default function Country({ params }: CountryPageProps) {
     }
   }
 
-  console.log(country)
-
   return (
     <main className="bg-neutral-50 px-16 py-10 dark:bg-blue-950 max-[490px]:px-4">
       <div className="flex">
@@ -82,7 +79,7 @@ export default function Country({ params }: CountryPageProps) {
           <div>
             <Image
               src={item.flags.svg}
-              alt={item.flags.alt}
+              alt={`A Bandeira do(a) ${item.name.common}`}
               width={560}
               height={404}
               className="rounded-md shadow-xl"
