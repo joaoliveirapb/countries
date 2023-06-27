@@ -57,7 +57,7 @@ export function FilterByRegion() {
             </li>
             {countriesIsFiltered && (
               <li
-                className="cursor-pointer rounded-md py-1"
+                className="cursor-pointer rounded-md bg-red-500/30 py-1 text-center text-red-500"
                 onClick={getCountries}
               >
                 All Countries
