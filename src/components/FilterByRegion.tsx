@@ -24,44 +24,44 @@ export function FilterByRegion() {
       </button>
       {filterIsOpen && (
         <div className="absolute mt-1 w-40 rounded-md bg-white shadow-md dark:bg-blue-900">
-          <ul className="px-4 py-2 text-sm">
-            <li
-              className="cursor-pointer rounded-md py-1"
+          <ul className="flex flex-col px-4 py-2 text-sm">
+            <button
+              className="py-1 text-left"
               onClick={() => filterByRegion('africa')}
             >
               Africa
-            </li>
-            <li
-              className="cursor-pointer rounded-md py-1"
+            </button>
+            <button
+              className="py-1 text-left"
               onClick={() => filterByRegion('america')}
             >
               America
-            </li>
-            <li
-              className="cursor-pointer rounded-md py-1"
+            </button>
+            <button
+              className="py-1 text-left"
               onClick={() => filterByRegion('asia')}
             >
               Asia
-            </li>
-            <li
-              className="cursor-pointer rounded-md py-1"
+            </button>
+            <button
+              className="py-1 text-left"
               onClick={() => filterByRegion('europe')}
             >
               Europe
-            </li>
-            <li
-              className="cursor-pointer rounded-md py-1"
+            </button>
+            <button
+              className="py-1 text-left"
               onClick={() => filterByRegion('oceania')}
             >
               Oceania
-            </li>
+            </button>
             {countriesIsFiltered && (
-              <li
-                className="cursor-pointer rounded-md bg-red-500/30 py-1 text-center text-red-500"
+              <button
+                className="rounded-md bg-red-500/30 py-1 text-red-500"
                 onClick={getCountries}
               >
                 All Countries
-              </li>
+              </button>
             )}
           </ul>
         </div>
